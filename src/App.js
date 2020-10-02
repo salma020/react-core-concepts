@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { useEffect } from 'react';
 
 function App() {
 const studentNames = ['emma','lima','sima','salma','kulsum']
@@ -51,9 +52,15 @@ function Counter() {
 }
 
 function Users() {
+  const [users,setUsers] = useState([]);
+  useEffect(()=>{
+    fetch('https://jsonplaceholder.typicode.com/users')
+    .then(res => res.json())
+    .then(data =>setUsers(data))
+  })
   return(
     <div>
-      <h3>Dynamic User</h3>
+      <h3>Dynamic User :{users.length}</h3>
     </div>
   )
 }
